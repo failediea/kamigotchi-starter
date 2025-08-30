@@ -41,7 +41,7 @@ const STEPS = [
     desc:
       "Buy on Sudoswap (~0.03 ETH floor) or mint via Vending Machine with a MUSU Gacha ticket.",
     tag: "NFT",
-    cta: { label: "Sudoswap (Yominet)", href: "https://sudoswap.xyz" },
+    cta: { label: "Sudoswap (Yominet)", href: "https://sudoswap.xyz/#/collections/yominet" },
     icon: "card",
   },
   {
@@ -65,7 +65,7 @@ const STEPS = [
     desc:
       "Stay above the liquidation threshold. Rest, feed, and watch the enemy list. Tools: kamibots.xyz / kamicalculator.xyz.",
     tag: "Safety",
-    cta: { label: "Open kamibots.xyz", href: "https://kamibots.xyz" },
+    cta: { label: "Open kamicalculator", href: "https://kamicalculator.xyz" },
     icon: "shield",
   },
   {
@@ -130,30 +130,31 @@ function PixelCard({ step }) {
   const [copied, setCopied] = useState(false);
 
   const handleClick = async (e) => {
+    console.log("Click detected", step?.cta?.action); // Debug log
+    
     if (step?.cta?.action === "add-network") {
       e.preventDefault();
-      if (window?.ethereum?.request) {
+      e.stopPropagation();
+      
+      console.log("Attempting to add network..."); // Debug log
+      
+      if (typeof window !== 'undefined' && window.ethereum) {
         try {
+          console.log("Sending request to wallet..."); // Debug log
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [YOMINET_PARAMS],
           });
+          console.log("Network added successfully!"); // Debug log
         } catch (err) {
           console.error("wallet_addEthereumChain error", err);
+          alert(`Error adding network: ${err.message || err}`);
         }
+      } else {
+        console.log("No wallet detected"); // Debug log
+        alert("No Web3 wallet detected. Please install MetaMask or another compatible wallet.");
       }
     }
-  };
-
-  const copyInline = () => {
-    navigator.clipboard
-      .writeText(
-        `Network Name: Yominet\nRPC URL: ${YOMINET_PARAMS.rpcUrls[0]}\nChain ID: ${YOMI_CHAIN_ID_DEC}\nCurrency Symbol: ETH`
-      )
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      });
   };
 
   return (
