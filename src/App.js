@@ -107,24 +107,6 @@ function PixelBackground() {
   );
 }
 
-// === Icons (swap with official Kami assets when ready) ===
-function Icon({ kind }) {
-  const common = "w-10 h-10 object-contain";
-  const map = {
-    network: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_network.svg",
-    bridge: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_link-ltr.svg",
-    user: "https://upload.wikimedia.org/wikipedia/commons/8/8b/OOjs_UI_icon_userAvatar.svg",
-    card: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Crystal_Clear_action_card_pick.svg",
-    portal: "https://upload.wikimedia.org/wikipedia/commons/3/32/Portalicon.svg",
-    grain: "https://upload.wikimedia.org/wikipedia/commons/7/73/Grain_icon.svg",
-    shield: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Shield_icon.svg",
-    arrow: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Up_Arrow.svg",
-    gas: "https://upload.wikimedia.org/wikipedia/commons/4/45/Gas_cylinder_font_awesome.svg",
-  };
-  const src = map[kind] || map.user;
-  return <img src={src} alt={`${kind} icon`} className={common} />;
-}
-
 // === Step Card (includes inline copy + EIP-3085) ===
 function PixelCard({ step }) {
   const [copied, setCopied] = useState(false);
@@ -155,6 +137,17 @@ function PixelCard({ step }) {
         alert("No Web3 wallet detected. Please install MetaMask or another compatible wallet.");
       }
     }
+  };
+
+  const copyInline = () => {
+    navigator.clipboard
+      .writeText(
+        `Network Name: Yominet\nRPC URL: ${YOMINET_PARAMS.rpcUrls[0]}\nChain ID: ${YOMI_CHAIN_ID_DEC}\nCurrency Symbol: ETH`
+      )
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      });
   };
 
   return (
