@@ -10,7 +10,7 @@ const YOMINET_PARAMS = {
 };
 const YOMI_CHAIN_ID_DEC = "428962654539583"; // decimal (for display/copy)
 
-// === Steps (copy updated content exactly as requested) ===
+// === Steps ===
 const STEPS = [
   {
     title: "1. Add the Yominet Network",
@@ -86,7 +86,7 @@ const STEPS = [
   },
 ];
 
-// === Background (needed; previously missing) ===
+// === Background ===
 function PixelBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -107,47 +107,58 @@ function PixelBackground() {
   );
 }
 
-// === Step Card (includes inline copy + EIP-3085) ===
+// === KamiIcon (was Icon) ===
+function KamiIcon({ kind }) {
+  const common = "w-10 h-10 object-contain";
+  const map = {
+    network: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_network.svg",
+    bridge: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_link-ltr.svg",
+    user: "https://upload.wikimedia.org/wikipedia/commons/8/8b/OOjs_UI_icon_userAvatar.svg",
+    card: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Crystal_Clear_action_card_pick.svg",
+    portal: "https://upload.wikimedia.org/wikipedia/commons/3/32/Portalicon.svg",
+    grain: "https://upload.wikimedia.org/wikipedia/commons/7/73/Grain_icon.svg",
+    shield: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Shield_icon.svg",
+    arrow: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Up_Arrow.svg",
+    gas: "https://upload.wikimedia.org/wikipedia/commons/4/45/Gas_cylinder_font_awesome.svg",
+  };
+  const src = map[kind] || map.user;
+  return <img src={src} alt={`${kind} icon`} className={common} />;
+}
+
+// === Step Card ===
 function PixelCard({ step }) {
   const [copied, setCopied] = useState(false);
 
+  async function copyInline() {
+    try {
+      const text = `RPC: ${YOMINET_PARAMS.rpcUrls[0]} | Chain ID: ${YOMI_CHAIN_ID_DEC}`;
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Clipboard copy failed", err);
+      alert("Could not copy to clipboard.");
+    }
+  }
+
   const handleClick = async (e) => {
-    console.log("Click detected", step?.cta?.action); // Debug log
-    
     if (step?.cta?.action === "add-network") {
       e.preventDefault();
       e.stopPropagation();
-      
-      console.log("Attempting to add network..."); // Debug log
-      
-      if (typeof window !== 'undefined' && window.ethereum) {
+      if (typeof window !== "undefined" && window.ethereum) {
         try {
-          console.log("Sending request to wallet..."); // Debug log
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [YOMINET_PARAMS],
           });
-          console.log("Network added successfully!"); // Debug log
         } catch (err) {
           console.error("wallet_addEthereumChain error", err);
           alert(`Error adding network: ${err.message || err}`);
         }
       } else {
-        console.log("No wallet detected"); // Debug log
         alert("No Web3 wallet detected. Please install MetaMask or another compatible wallet.");
       }
     }
-  };
-
-  const copyInline = () => {
-    navigator.clipboard
-      .writeText(
-        `Network Name: Yominet\nRPC URL: ${YOMINET_PARAMS.rpcUrls[0]}\nChain ID: ${YOMI_CHAIN_ID_DEC}\nCurrency Symbol: ETH`
-      )
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      });
   };
 
   return (
@@ -155,7 +166,7 @@ function PixelCard({ step }) {
       <div className="absolute inset-0 rounded-2xl shadow-[0_0_0_2px_#2c2b40,6px_6px_0_0_#171625] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-transform" />
       <div className="relative rounded-2xl bg-[#151226]/80 backdrop-blur-sm border border-[#2c2b40] p-5 md:p-6 flex items-start gap-4">
         <div className="shrink-0 w-16 h-16 rounded-xl bg-[#0e0b1b] border border-[#2c2b40] grid place-items-center">
-          <Icon kind={step.icon} />
+          <KamiIcon kind={step.icon} />
         </div>
         <div>
           <div className="text-xs uppercase tracking-widest text-fuchsia-300/80 mb-1">{step.tag}</div>
