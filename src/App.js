@@ -308,7 +308,7 @@ export default function App() {
           <div className="flex gap-4">
             <a href="https://docs.kamigotchi.io" target="_blank" rel="noreferrer" className="hover:text-white">Docs</a>
             <a href="https://discord.gg/kamigotchi" target="_blank" rel="noreferrer" className="hover:text-white">Discord</a>
-            <a href="https://github.com/failediea/kamigotchi" target="_blank" rel="noreferrer" className="hover:text-white">Game Code</a>
+            <a href="https://github.com/Asphodel-OS/kamigotchi" target="_blank" rel="noreferrer" className="hover:text-white">Game Code</a>
           </div>
         </div>
       </footer>
