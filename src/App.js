@@ -5,7 +5,7 @@ import {
   User,
   CreditCard,
   DoorOpen,
-  DollarSign,  // used for Farming
+  DollarSign,
   Shield,
   ArrowUp,
   Fuel,
@@ -69,7 +69,7 @@ const STEPS = [
       "Farm MUSU in Normal/Scrap/Eerie/Insect rooms. Matching your Type is faster (but drains more HP).",
     tag: "Farming",
     cta: { label: "Room & Traits Guide", href: "https://docs.kamigotchi.io/game/harvesting" },
-    icon: "grain", // will render as DollarSign via KamiIcon mapping
+    icon: "grain", // mapped to DollarSign icon
   },
   {
     title: "7. Manage HP & Predators",
@@ -118,24 +118,25 @@ function PixelBackground() {
   );
 }
 
-// === KamiIcon using lucide-react ===
+// === Icons via lucide-react ===
 function KamiIcon({ kind }) {
-  const common = "w-10 h-10";
-  const colorClasses = "text-emerald-300"; // tweak per theme
+  const base = "w-10 h-10";
+  const color = "text-emerald-300";
+  const cls = `${base} ${color}`;
 
   const map = {
-    network: <Network className={`${common} ${colorClasses}`} />,
-    bridge: <Link className={`${common} ${colorClasses}`} />,
-    user: <User className={`${common} ${colorClasses}`} />,
-    card: <CreditCard className={`${common} ${colorClasses}`} />,
-    portal: <DoorOpen className={`${common} ${colorClasses}`} />,
-    grain: <DollarSign className={`${common} ${colorClasses}`} />, // 👈 money sign for Farming
-    shield: <Shield className={`${common} ${colorClasses}`} />,
-    arrow: <ArrowUp className={`${common} ${colorClasses}`} />,
-    gas: <Fuel className={`${common} ${colorClasses}`} />,
+    network: <Network className={cls} />,
+    bridge: <Link className={cls} />,
+    user: <User className={cls} />,
+    card: <CreditCard className={cls} />,
+    portal: <DoorOpen className={cls} />,
+    grain: <DollarSign className={cls} />, // money icon for Farming
+    shield: <Shield className={cls} />,
+    arrow: <ArrowUp className={cls} />,
+    gas: <Fuel className={cls} />,
   };
 
-  return map[kind] || <User className={`${common} ${colorClasses}`} />;
+  return map[kind] || <User className={cls} />;
 }
 
 // === Step Card ===
@@ -175,13 +176,17 @@ function PixelCard({ step }) {
   };
 
   return (
-    <div className="relative group">
+    // make the outermost wrapper fill the grid cell
+    <div className="relative group h-full">
       <div className="absolute inset-0 rounded-2xl shadow-[0_0_0_2px_#2c2b40,6px_6px_0_0_#171625] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-transform" />
-      <div className="relative rounded-2xl bg-[#151226]/80 backdrop-blur-sm border border-[#2c2b40] p-5 md:p-6 flex items-start gap-4">
+      {/* inner card fills height */}
+      <div className="relative h-full rounded-2xl bg-[#151226]/80 backdrop-blur-sm border border-[#2c2b40] p-5 md:p-6 flex items-start gap-4">
         <div className="shrink-0 w-16 h-16 rounded-xl bg-[#0e0b1b] border border-[#2c2b40] grid place-items-center">
           <KamiIcon kind={step.icon} />
         </div>
-        <div>
+
+        {/* content grows to use remaining height if needed */}
+        <div className="flex-1 flex flex-col">
           <div className="text-xs uppercase tracking-widest text-fuchsia-300/80 mb-1">{step.tag}</div>
           <h3 className="text-lg md:text-xl font-extrabold text-white">{step.title}</h3>
           <p className="mt-2 text-sm md:text-base text-violet-100/80 leading-relaxed">{step.desc}</p>
@@ -212,8 +217,12 @@ function PixelCard({ step }) {
 
               {step?.cta?.action === "add-network" && (
                 <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px] relative">
-                  <code className="px-2 py-1 rounded bg-[#1a1630] border border-[#2c2b40] text-violet-100/90">RPC: {YOMINET_PARAMS.rpcUrls[0]}</code>
-                  <code className="px-2 py-1 rounded bg-[#1a1630] border border-[#2c2b40] text-violet-100/90">Chain ID: {YOMI_CHAIN_ID_DEC}</code>
+                  <code className="px-2 py-1 rounded bg-[#1a1630] border border-[#2c2b40] text-violet-100/90">
+                    RPC: {YOMINET_PARAMS.rpcUrls[0]}
+                  </code>
+                  <code className="px-2 py-1 rounded bg-[#1a1630] border border-[#2c2b40] text-violet-100/90">
+                    Chain ID: {YOMI_CHAIN_ID_DEC}
+                  </code>
                   <button
                     onClick={copyInline}
                     className="px-2 py-1 rounded bg-[#0f0c1f] border border-[#2c2b40] text-emerald-300 hover:text-emerald-200"
@@ -227,6 +236,9 @@ function PixelCard({ step }) {
               )}
             </>
           )}
+
+          {/* spacer keeps CTAs near top but allows uniform height */}
+          <div className="flex-1" />
         </div>
       </div>
     </div>
@@ -279,7 +291,8 @@ export default function App() {
 
       {/* Steps */}
       <section id="steps" className="relative z-10 max-w-6xl mx-auto px-6 pb-16">
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* items-stretch makes grid rows equal height; each PixelCard has h-full */}
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
           {STEPS.map((s, i) => (
             <PixelCard key={i} step={s} />
           ))}
