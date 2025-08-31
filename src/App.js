@@ -26,7 +26,7 @@ const STEPS = [
   {
     title: "1. Add the Yominet Network",
     desc:
-      "Open the Kamigotchi dApp and approve the wallet prompt to add Yominet. Or use the one-click button below to add it via MetaMask/Rabby.",
+      "Use the one-click button below to add it via MetaMask/Rabby.OR copy the RPC and Chain ID",
     tag: "Network",
     cta: { label: "Add via MetaMask", href: null, action: "add-network" },
     icon: "network",
