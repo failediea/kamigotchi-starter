@@ -53,7 +53,7 @@ const STEPS = [
     desc:
       "Buy on Sudoswap (~0.03 ETH floor).",
     tag: "NFT",
-    cta: { label: "Sudoswap (Yominet)", href: "https://sudoswap.xyz/#/collections/yominet" },
+    cta: { label: "Sudoswap (Yominet)", href: "https://sudoswap.xyz/#/browse/yominet/buy/0x5d4376b62fa8ac16dfabe6a9861e11c33a48c677" },
     icon: "card",
   },
   {
