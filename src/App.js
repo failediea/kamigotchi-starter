@@ -50,7 +50,7 @@ const STEPS = [
   {
     title: "4. Acquire a Kamigotchi",
     desc:
-      "Buy on Sudoswap (~0.03 ETH floor) or mint via Vending Machine with a MUSU Gacha ticket.",
+      "Buy on Sudoswap (~0.03 ETH floor).",
     tag: "NFT",
     cta: { label: "Sudoswap (Yominet)", href: "https://sudoswap.xyz/#/collections/yominet" },
     icon: "card",
