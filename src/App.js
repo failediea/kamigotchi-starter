@@ -74,7 +74,7 @@ const STEPS = [
   {
     title: "7. Manage HP & Predators",
     desc:
-      "Stay above the liquidation threshold. Rest, feed, and watch the enemy list. Tools: kamibots.xyz / kamicalculator.xyz.",
+      "Stay above the liquidation threshold. Rest, feed, and watch the enemy list. Use Kamiculator below",
     tag: "Safety",
     cta: { label: "Open kamicalculator", href: "https://www.kamiculator.xyz/" },
     icon: "shield",
