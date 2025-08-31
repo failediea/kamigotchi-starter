@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import {
+  Network,
+  Link,
+  User,
+  CreditCard,
+  DoorOpen,
+  DollarSign,  // used for Farming
+  Shield,
+  ArrowUp,
+  Fuel,
+} from "lucide-react";
 
 // === Network config (EIP-3085) ===
 const YOMINET_PARAMS = {
@@ -58,7 +69,7 @@ const STEPS = [
       "Farm MUSU in Normal/Scrap/Eerie/Insect rooms. Matching your Type is faster (but drains more HP).",
     tag: "Farming",
     cta: { label: "Room & Traits Guide", href: "https://docs.kamigotchi.io/game/harvesting" },
-    icon: "grain",
+    icon: "grain", // will render as DollarSign via KamiIcon mapping
   },
   {
     title: "7. Manage HP & Predators",
@@ -107,22 +118,24 @@ function PixelBackground() {
   );
 }
 
-// === KamiIcon (was Icon) ===
+// === KamiIcon using lucide-react ===
 function KamiIcon({ kind }) {
-  const common = "w-10 h-10 object-contain";
+  const common = "w-10 h-10";
+  const colorClasses = "text-emerald-300"; // tweak per theme
+
   const map = {
-    network: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_network.svg",
-    bridge: "https://upload.wikimedia.org/wikipedia/commons/3/3d/OOjs_UI_icon_link-ltr.svg",
-    user: "https://upload.wikimedia.org/wikipedia/commons/8/8b/OOjs_UI_icon_userAvatar.svg",
-    card: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Crystal_Clear_action_card_pick.svg",
-    portal: "https://upload.wikimedia.org/wikipedia/commons/3/32/Portalicon.svg",
-    grain: "https://upload.wikimedia.org/wikipedia/commons/7/73/Grain_icon.svg",
-    shield: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Shield_icon.svg",
-    arrow: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Up_Arrow.svg",
-    gas: "https://upload.wikimedia.org/wikipedia/commons/4/45/Gas_cylinder_font_awesome.svg",
+    network: <Network className={`${common} ${colorClasses}`} />,
+    bridge: <Link className={`${common} ${colorClasses}`} />,
+    user: <User className={`${common} ${colorClasses}`} />,
+    card: <CreditCard className={`${common} ${colorClasses}`} />,
+    portal: <DoorOpen className={`${common} ${colorClasses}`} />,
+    grain: <DollarSign className={`${common} ${colorClasses}`} />, // 👈 money sign for Farming
+    shield: <Shield className={`${common} ${colorClasses}`} />,
+    arrow: <ArrowUp className={`${common} ${colorClasses}`} />,
+    gas: <Fuel className={`${common} ${colorClasses}`} />,
   };
-  const src = map[kind] || map.user;
-  return <img src={src} alt={`${kind} icon`} className={common} />;
+
+  return map[kind] || <User className={`${common} ${colorClasses}`} />;
 }
 
 // === Step Card ===
