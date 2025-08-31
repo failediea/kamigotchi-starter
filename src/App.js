@@ -42,7 +42,7 @@ const STEPS = [
   {
     title: "3. Create Your Account",
     desc:
-      "Go to the Kamigotchi site. Connect your owner wallet (MetaMask/Rabby).",
+      "Go to the Kamigotchi site. Connect your owner wallet (MetaMask/Rabby) Then fund your Operator wallet with ETH.",
     tag: "Account",
     cta: { label: "Open Kamigotchi App", href: "https://app.kamigotchi.io" },
     icon: "user",
