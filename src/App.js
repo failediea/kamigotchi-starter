@@ -10,6 +10,7 @@ import {
   ArrowUp,
   Fuel,
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 
 // === Network config (EIP-3085) ===
 const YOMINET_PARAMS = {
