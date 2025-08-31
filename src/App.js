@@ -49,7 +49,7 @@ const STEPS = [
     desc:
       "Use the Kami Portal to register/bridge your NFT into the game world. You can portal out later to trade.",
     tag: "Portal",
-    cta: { label: "Learn about Portals", href: "https://docs.kamigotchi.io" },
+    cta: { label: "Short Video about Portals", href: "https://x.com/kamigotchiworld/status/1961128794133008688" },
     icon: "portal",
   },
   {
@@ -57,7 +57,7 @@ const STEPS = [
     desc:
       "Farm MUSU in Normal/Scrap/Eerie/Insect rooms. Matching your Type is faster (but drains more HP).",
     tag: "Farming",
-    cta: { label: "Room & Traits Guide", href: "https://docs.kamigotchi.io" },
+    cta: { label: "Room & Traits Guide", href: "https://docs.kamigotchi.io/game/harvesting" },
     icon: "grain",
   },
   {
@@ -65,7 +65,7 @@ const STEPS = [
     desc:
       "Stay above the liquidation threshold. Rest, feed, and watch the enemy list. Tools: kamibots.xyz / kamicalculator.xyz.",
     tag: "Safety",
-    cta: { label: "Open kamicalculator", href: "https://kamicalculator.xyz" },
+    cta: { label: "Open kamicalculator", href: "https://www.kamiculator.xyz/" },
     icon: "shield",
   },
   {
@@ -73,7 +73,7 @@ const STEPS = [
     desc:
       "Earn XP → spend Skill Points: Harvester, Guardian, Predator, Enlightened. Respecing is expensive; be careful with spending talents.",
     tag: "Progression",
-    cta: { label: "Skill Trees", href: "https://docs.kamigotchi.io" },
+    cta: { label: "Skill Trees", href: "https://docs.kamigotchi.io/game/kamigotchi/levels-and-skills" },
     icon: "arrow",
   },
   {
