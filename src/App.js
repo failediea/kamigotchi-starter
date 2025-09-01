@@ -35,7 +35,7 @@ const STEPS = [
   {
     title: "2. Bridge ETH to Yominet",
     desc:
-      "Bridge a few dollars of ETH from Ethereum, Base, or Arbitrum using Initia Bridge or gas.zip. Keep ~$5–10 for gas to start.",
+      "Bridge in ~0.0035 of ETH from Ethereum, Base, or Arbitrum using Initia Bridge or gas.zip. Keep ~$5–10 for gas to start.",
     tag: "Bridge",
     cta: { label: "Open Initia Bridge", href: "https://bridge.initia.xyz" },
     icon: "bridge",
