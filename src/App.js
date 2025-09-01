@@ -49,7 +49,7 @@ const STEPS = [
     icon: "user",
   },
   {
-    title: "4. Acquire a Kamigotchi",
+    title: "4. Research and Acquire a Kamigotchi. We can always reroll the Kami later",
     desc:
       "Buy on Sudoswap (~0.03 ETH floor).",
     tag: "NFT",
