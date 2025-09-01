@@ -67,7 +67,7 @@ const STEPS = [
   {
     title: "6. Select a Farming Node",
     desc:
-      "Farm MUSU in Normal/Scrap/Eerie/Insect rooms. Matching your Type is faster (but drains more HP).",
+      "Farm MUSU or VIPP in Normal/Scrap/Eerie/Insect rooms.",
     tag: "Farming",
     cta: { label: "Room & Traits Guide", href: "https://docs.kamigotchi.io/game/harvesting" },
     icon: "grain", // mapped to DollarSign icon
